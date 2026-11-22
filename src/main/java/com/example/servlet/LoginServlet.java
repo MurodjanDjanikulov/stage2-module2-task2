@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         List<String> users = Users.getInstance().getUsers();
-        if (users.contains(login) && !password.isEmpty()) {
+        if (login!=null&&password!=null&&users.contains(login) && !password.isEmpty()) {
             request.getSession().setAttribute("user", login);
             response.sendRedirect("/user/hello.jsp");
         } else {
