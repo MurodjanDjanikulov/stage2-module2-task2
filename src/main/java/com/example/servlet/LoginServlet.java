@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -17,8 +16,7 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        System.out.println(getServletContext().getContextPath());
-        HttpSession session = request.getSession(false);
-        if (session==null||session.getAttribute("user") == null) {
+        if (request.getSession().getAttribute("user") == null) {
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         } else {
             response.sendRedirect("/user/hello.jsp");
@@ -32,7 +30,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         List<String> users = Users.getInstance().getUsers();
-        if (login!=null&&password!=null&&users.contains(login) && !password.isEmpty()) {
+        if (users.contains(login) && !password.isEmpty()) {
             request.getSession().setAttribute("user", login);
             response.sendRedirect("/user/hello.jsp");
         } else {
