@@ -14,15 +14,6 @@ public class AuthFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-/*
-        HttpSession session = ((HttpServletRequest) request).getSession(true);
-        if (session.getAttribute("user") == null) {
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
-        } else {
-            chain.doFilter(request, response);
-        }
-*/
-
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
